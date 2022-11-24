@@ -1,22 +1,22 @@
-package com.gcit.siva.bookmyshow.service.ShowService;
+package com.gcit.siva.bookmyshow.service.impl;
 
-import com.gcit.siva.bookmyshow.DTO.BookTicketDto.BookSeatForShowRequest;
-import com.gcit.siva.bookmyshow.DTO.BookTicketDto.BookSeatForShowResponse;
-import com.gcit.siva.bookmyshow.DTO.ListAllShowTimingsByTheaterNameOrMovieName.ListAllMoviesByTheaterName.AllMoviesByTheaterNameDto;
-import com.gcit.siva.bookmyshow.DTO.ListAllShowTimingsByTheaterNameOrMovieName.ListAllMoviesByTheaterName.MovieNameDto;
-import com.gcit.siva.bookmyshow.DTO.ListAllShowTimingsByTheaterNameOrMovieName.ListAllTheaterByMovieName.AllTheaterByMovieNameDto;
-import com.gcit.siva.bookmyshow.DTO.ListAllShowTimingsByTheaterNameOrMovieName.ShowScreenTimingDto;
-import com.gcit.siva.bookmyshow.DTO.SeatAvailableDto;
+import com.gcit.siva.bookmyshow.dto.BookSeatForShowRequest;
+import com.gcit.siva.bookmyshow.dto.BookSeatForShowResponse;
+import com.gcit.siva.bookmyshow.dto.AllMoviesByTheaterNameDto;
+import com.gcit.siva.bookmyshow.dto.MovieNameDto;
+import com.gcit.siva.bookmyshow.dto.AllTheaterByMovieNameDto;
+import com.gcit.siva.bookmyshow.dto.ShowScreenTimingDto;
+import com.gcit.siva.bookmyshow.dto.SeatAvailableDto;
 import com.gcit.siva.bookmyshow.entity.Movie;
 import com.gcit.siva.bookmyshow.entity.ShowScreen;
 import com.gcit.siva.bookmyshow.entity.Theater;
 import com.gcit.siva.bookmyshow.repository.ShowScreenRepo;
-import com.gcit.siva.bookmyshow.request.ShowRequest;
-import com.gcit.siva.bookmyshow.service.movieService.MovieService;
-import com.gcit.siva.bookmyshow.service.theaterService.TheaterService;
+import com.gcit.siva.bookmyshow.dto.request.ShowRequest;
+import com.gcit.siva.bookmyshow.service.MovieService;
+import com.gcit.siva.bookmyshow.service.ShowScreenService;
+import com.gcit.siva.bookmyshow.service.TheaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -175,6 +175,8 @@ public class ShowScreenServiceImpl implements ShowScreenService {
         if (showScreen.isPresent()){
             return showScreen.get();
         }throw new RuntimeException("Movie not found " + showId);
+
+
 
     }
 

@@ -1,6 +1,6 @@
-package com.gcit.siva.bookmyshow.DTO.ListAllShowTimingsByTheaterNameOrMovieName.ListAllTheaterByMovieName;
+package com.gcit.siva.bookmyshow.dto;
 
-import com.gcit.siva.bookmyshow.DTO.ListAllShowTimingsByTheaterNameOrMovieName.ShowScreenTimingDto;
+import com.gcit.siva.bookmyshow.dto.ShowScreenTimingDto;
 import lombok.Data;
 import java.util.List;
 

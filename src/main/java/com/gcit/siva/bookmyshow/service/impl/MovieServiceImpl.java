@@ -1,8 +1,9 @@
-package com.gcit.siva.bookmyshow.service.movieService;
+package com.gcit.siva.bookmyshow.service.impl;
 
 import com.gcit.siva.bookmyshow.entity.Movie;
 import com.gcit.siva.bookmyshow.repository.MovieRepo;
-import com.gcit.siva.bookmyshow.request.MovieRequest;
+import com.gcit.siva.bookmyshow.dto.request.MovieRequest;
+import com.gcit.siva.bookmyshow.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MovieServiceImpl implements MovieService{
+public class MovieServiceImpl implements MovieService {
 
     @Autowired
     private MovieRepo movieRepo;

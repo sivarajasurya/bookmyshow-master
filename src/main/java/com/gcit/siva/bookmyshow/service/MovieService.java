@@ -1,10 +1,9 @@
-package com.gcit.siva.bookmyshow.service.movieService;
+package com.gcit.siva.bookmyshow.service;
 
 import com.gcit.siva.bookmyshow.entity.Movie;
-import com.gcit.siva.bookmyshow.request.MovieRequest;
+import com.gcit.siva.bookmyshow.dto.request.MovieRequest;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface MovieService {
 

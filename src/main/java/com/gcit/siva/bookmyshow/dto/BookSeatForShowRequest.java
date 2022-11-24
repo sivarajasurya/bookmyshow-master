@@ -1,4 +1,4 @@
-package com.gcit.siva.bookmyshow.DTO.BookTicketDto;
+package com.gcit.siva.bookmyshow.dto;
 
 import lombok.Data;
 

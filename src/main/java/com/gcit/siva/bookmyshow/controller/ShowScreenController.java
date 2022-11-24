@@ -1,24 +1,18 @@
 package com.gcit.siva.bookmyshow.controller;
 
-import com.gcit.siva.bookmyshow.DTO.BookTicketDto.BookSeatForShowRequest;
-import com.gcit.siva.bookmyshow.DTO.BookTicketDto.BookSeatForShowResponse;
-import com.gcit.siva.bookmyshow.DTO.ListAllShowTimingsByTheaterNameOrMovieName.ListAllMoviesByTheaterName.AllMoviesByTheaterNameDto;
-import com.gcit.siva.bookmyshow.DTO.ListAllShowTimingsByTheaterNameOrMovieName.ListAllTheaterByMovieName.AllTheaterByMovieNameDto;
-import com.gcit.siva.bookmyshow.DTO.SeatAvailableDto;
-import com.gcit.siva.bookmyshow.DTO.ShowScreenDto;
-import com.gcit.siva.bookmyshow.entity.Movie;
+import com.gcit.siva.bookmyshow.dto.BookSeatForShowRequest;
+import com.gcit.siva.bookmyshow.dto.BookSeatForShowResponse;
+import com.gcit.siva.bookmyshow.dto.AllMoviesByTheaterNameDto;
+import com.gcit.siva.bookmyshow.dto.AllTheaterByMovieNameDto;
+import com.gcit.siva.bookmyshow.dto.SeatAvailableDto;
 import com.gcit.siva.bookmyshow.entity.ShowScreen;
-import com.gcit.siva.bookmyshow.entity.Theater;
-import com.gcit.siva.bookmyshow.request.ShowRequest;
-import com.gcit.siva.bookmyshow.service.ShowService.ShowScreenService;
-import com.gcit.siva.bookmyshow.service.movieService.MovieService;
-import com.gcit.siva.bookmyshow.service.theaterService.TheaterService;
+import com.gcit.siva.bookmyshow.dto.request.ShowRequest;
+import com.gcit.siva.bookmyshow.service.ShowScreenService;
+import com.gcit.siva.bookmyshow.service.MovieService;
+import com.gcit.siva.bookmyshow.service.TheaterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

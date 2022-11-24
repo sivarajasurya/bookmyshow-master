@@ -1,4 +1,4 @@
-package com.gcit.siva.bookmyshow.request;
+package com.gcit.siva.bookmyshow.dto.request;
 
 import lombok.Data;
 

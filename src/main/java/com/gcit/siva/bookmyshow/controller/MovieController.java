@@ -1,9 +1,11 @@
 package com.gcit.siva.bookmyshow.controller;
 
 import com.gcit.siva.bookmyshow.entity.Movie;
-import com.gcit.siva.bookmyshow.request.MovieRequest;
-import com.gcit.siva.bookmyshow.service.movieService.MovieService;
+import com.gcit.siva.bookmyshow.dto.request.MovieRequest;
+import com.gcit.siva.bookmyshow.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,8 +25,8 @@ public class MovieController {
     }
 
     @GetMapping("/listMovieName")
-    public List<Movie> listMovieNames(){
-        return movieService.listMovieNames();
+    public ResponseEntity<List<Movie>> listMovieNames(){
+        return new  ResponseEntity<List<Movie>>(movieService.listMovieNames(), HttpStatus.OK);
     }
 
 

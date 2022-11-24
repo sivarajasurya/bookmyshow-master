@@ -1,12 +1,12 @@
-package com.gcit.siva.bookmyshow.service.ShowService;
+package com.gcit.siva.bookmyshow.service;
 
-import com.gcit.siva.bookmyshow.DTO.BookTicketDto.BookSeatForShowRequest;
-import com.gcit.siva.bookmyshow.DTO.BookTicketDto.BookSeatForShowResponse;
-import com.gcit.siva.bookmyshow.DTO.ListAllShowTimingsByTheaterNameOrMovieName.ListAllMoviesByTheaterName.AllMoviesByTheaterNameDto;
-import com.gcit.siva.bookmyshow.DTO.ListAllShowTimingsByTheaterNameOrMovieName.ListAllTheaterByMovieName.AllTheaterByMovieNameDto;
-import com.gcit.siva.bookmyshow.DTO.SeatAvailableDto;
+import com.gcit.siva.bookmyshow.dto.BookSeatForShowRequest;
+import com.gcit.siva.bookmyshow.dto.BookSeatForShowResponse;
+import com.gcit.siva.bookmyshow.dto.AllMoviesByTheaterNameDto;
+import com.gcit.siva.bookmyshow.dto.AllTheaterByMovieNameDto;
+import com.gcit.siva.bookmyshow.dto.SeatAvailableDto;
 import com.gcit.siva.bookmyshow.entity.ShowScreen;
-import com.gcit.siva.bookmyshow.request.ShowRequest;
+import com.gcit.siva.bookmyshow.dto.request.ShowRequest;
 
 import java.util.List;
 

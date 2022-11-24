@@ -3,6 +3,7 @@ package com.gcit.siva.bookmyshow.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -15,6 +16,7 @@ public class Theater{
     private long theaterId;
 
     @Column(name = "theater_name")
+    @NotBlank(message = "Enter a valid input")
     private String theaterName;
 
     @OneToMany(mappedBy = "theater")
