@@ -34,8 +34,22 @@ public class TheaterServiceImpl implements TheaterService {
     }
 
     @Override
-    public List<Theater> listAllTheaterName() {
-        return theaterRepo.findAll();
+    public Theater saveTheaterName(Theater theater) {
+        return theaterRepo.save(theater);
+    }
+
+    @Override
+    public List<TheaterRequest> listAllTheaterName() {
+        List<Theater> theater = theaterRepo.findAll();
+        List<TheaterRequest> theaterRequests = new ArrayList<>();
+
+        for(Theater t:theater){
+            TheaterRequest theaterRequest = new TheaterRequest();
+            theaterRequest.setTheaterId(t.getTheaterId());
+            theaterRequest.setTheaterName(t.getTheaterName());
+            theaterRequests.add(theaterRequest);
+        }
+        return theaterRequests;
     }
 
     @Override
@@ -47,9 +61,10 @@ public class TheaterServiceImpl implements TheaterService {
     }
 
     @Override
-    public  Theater findTheaterByTheaterNames(String theaterName){
+    public  TheaterRequest findTheaterByTheaterNames(String theaterName){
         Theater theater = theaterRepo.findTheaterByTheaterName(theaterName);
-        return theater;
+        TheaterRequest theaterRequest = new TheaterRequest(theater.getTheaterId(),theater.getTheaterName());
+        return theaterRequest;
     }
 
     @Override
@@ -66,8 +81,4 @@ public class TheaterServiceImpl implements TheaterService {
         }}
         return list;
     }
-
-
-
 }
-

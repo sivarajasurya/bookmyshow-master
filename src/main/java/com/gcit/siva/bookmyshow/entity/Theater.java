@@ -1,13 +1,19 @@
 package com.gcit.siva.bookmyshow.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Theater{
 
     @Id
@@ -21,6 +27,7 @@ public class Theater{
 
     @OneToMany(mappedBy = "theater")
     @JsonBackReference
+    @JsonIgnore
     private List<ShowScreen> showScreens;
 
 }

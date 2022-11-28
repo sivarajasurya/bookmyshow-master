@@ -12,7 +12,6 @@ import com.gcit.siva.bookmyshow.service.MovieService;
 import com.gcit.siva.bookmyshow.service.TheaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -52,7 +51,6 @@ public class ShowScreenController {
         return service.getTicketAvailabilityByScreenId(screenId);
     }
 
-    //Endpoint used in security project
     @GetMapping("/getShowScreenByShowId/{showId}")
     public ShowScreen getShowScreenByShowId(@PathVariable long showId){
         return service.getShowScreenByShowId(showId);

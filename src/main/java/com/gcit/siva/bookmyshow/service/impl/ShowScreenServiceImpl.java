@@ -7,6 +7,7 @@ import com.gcit.siva.bookmyshow.dto.MovieNameDto;
 import com.gcit.siva.bookmyshow.dto.AllTheaterByMovieNameDto;
 import com.gcit.siva.bookmyshow.dto.ShowScreenTimingDto;
 import com.gcit.siva.bookmyshow.dto.SeatAvailableDto;
+import com.gcit.siva.bookmyshow.dto.request.TheaterRequest;
 import com.gcit.siva.bookmyshow.entity.Movie;
 import com.gcit.siva.bookmyshow.entity.ShowScreen;
 import com.gcit.siva.bookmyshow.entity.Theater;
@@ -16,6 +17,8 @@ import com.gcit.siva.bookmyshow.service.MovieService;
 import com.gcit.siva.bookmyshow.service.ShowScreenService;
 import com.gcit.siva.bookmyshow.service.TheaterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,14 +37,13 @@ public class ShowScreenServiceImpl implements ShowScreenService {
     @Autowired
     private MovieService movieService;
 
-
     @Override
     public List<ShowScreen> findAllShowScreen() {
         return showScreenRepo.findAll();
     }
 
     @Override
-    public ShowScreen saveShow(long theaterId, long movieID, ShowRequest showRequest) {
+    public ResponseEntity saveShow(long theaterId, long movieID, ShowRequest showRequest) {
 
         ShowScreen showScreen = new ShowScreen();
         Theater theater1 = theaterService.findByID(theaterId);
@@ -53,7 +55,8 @@ public class ShowScreenServiceImpl implements ShowScreenService {
         showScreen.setBookedSeat(showRequest.getBookedSeat());
         showScreen.setDate(showRequest.getDate());
 
-        return showScreenRepo.save(showScreen);
+        ShowScreen save = showScreenRepo.save(showScreen);
+        return (save!=null) ? new ResponseEntity<>(save, HttpStatus.OK) : new ResponseEntity<>("Show Screen is not added",HttpStatus.BAD_REQUEST);
     }
 
     @Override
@@ -77,9 +80,10 @@ public class ShowScreenServiceImpl implements ShowScreenService {
 
         if ((totalSeat - bookedSeat) > 0) {
             seatAvailableDto.setAvailableSeats(totalSeat - bookedSeat);
-            return seatAvailableDto;
+        }else {
+            seatAvailableDto.setAvailableSeats(0);
         }
-        seatAvailableDto.setAvailableSeats(0);
+
         return seatAvailableDto;
     }
 
@@ -97,6 +101,7 @@ public class ShowScreenServiceImpl implements ShowScreenService {
             int i = showScreen.get().getBookedSeat() + numOfTickets;
             ticket.setAvailableSeats(availableNum-numOfTickets);
             ticket.setBookedSeats(numOfTickets);
+
             showScreenRepo.decreaseCountOfBookedSeat(i,showScreen.get().getShowId());
             ticket.setShowDateAndTiming(showScreen.get().getDate());
             ticket.setStatus("The Ticket has been booked");
@@ -105,7 +110,6 @@ public class ShowScreenServiceImpl implements ShowScreenService {
             ticket.setBookedSeats(0);
             ticket.setStatus("The Ticket has not been booked");
         }
-
         return ticket;
     }
 
@@ -131,7 +135,6 @@ public class ShowScreenServiceImpl implements ShowScreenService {
             ticket.setBookedSeats(0);
             ticket.setStatus("The Ticket has not been booked");
         }
-
         return ticket;
     }
 
@@ -175,16 +178,11 @@ public class ShowScreenServiceImpl implements ShowScreenService {
         if (showScreen.isPresent()){
             return showScreen.get();
         }throw new RuntimeException("Movie not found " + showId);
-
-
-
     }
-
 
     @Override
     public AllMoviesByTheaterNameDto findAllShowScreenByTheaterName(String theaterName) {
-
-        Theater theater = theaterService.findTheaterByTheaterNames(theaterName);
+        TheaterRequest theater = theaterService.findTheaterByTheaterNames(theaterName);
         long id = theater.getTheaterId();
 
         List<Long> movieId = showScreenRepo.findMovieIdByTheaterId(id);
@@ -214,5 +212,4 @@ public class ShowScreenServiceImpl implements ShowScreenService {
             dto.setMovieName(list1);
         return dto;
     }
-
 }

@@ -20,13 +20,15 @@ public class MovieController {
     private MovieService movieService;
 
     @PostMapping("/saveMovieName")
-    public Movie saveMovieNames(@RequestBody MovieRequest movie){
-        return movieService.saveMovieName(movie);
+    public ResponseEntity saveMovieNames(@RequestBody Movie movie){
+        Movie movie1 = movieService.saveMovieName(movie);
+        return (movie1!=null) ? new ResponseEntity<>(movie1,HttpStatus.OK) : new ResponseEntity<>("Theater is not added ",HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/listMovieName")
-    public ResponseEntity<List<Movie>> listMovieNames(){
-        return new  ResponseEntity<List<Movie>>(movieService.listMovieNames(), HttpStatus.OK);
+    public ResponseEntity listMovieNames(){
+        List<Movie> movies = movieService.listMovieNames();
+        return (movies.stream().count()!=0) ? new ResponseEntity<>(movies,HttpStatus.OK) : new ResponseEntity<>("No movies has been found",HttpStatus.NO_CONTENT);
     }
 
 

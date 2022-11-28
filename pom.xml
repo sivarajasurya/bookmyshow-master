@@ -60,14 +60,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina -->
+<!--		&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>org.apache.tomcat</groupId>-->
+<!--			<artifactId>tomcat-catalina</artifactId>-->
+<!--			<version>10.1.1</version>-->
+<!--			<scope>provided</scope>-->
+<!--		</dependency>-->
 		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>tomcat-catalina</artifactId>
-			<version>10.1.1</version>
-			<scope>provided</scope>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 
 	<build>

@@ -19,12 +19,16 @@ public class TheaterController {
     @PostMapping("/addTheaterName")
     public ResponseEntity theater (@RequestBody TheaterRequest theater){
         Theater obj = theaterService.saveTheaterName(theater);
-//        max = (a > b) ? a : b;
         return (obj!=null)?new ResponseEntity<>(obj,HttpStatus.OK) : new ResponseEntity<>("Theater is not added ",HttpStatus.BAD_REQUEST) ;
+    }
+
+    @PostMapping("/addTheaterNamesss")
+    public Theater theater (@RequestBody Theater theater){
+        return theaterService.saveTheaterName(theater);
     }
     @GetMapping("/showAllTheaterName")
     public ResponseEntity theaters (){
-        List<Theater> obj = theaterService.listAllTheaterName();
+        List<TheaterRequest> obj = theaterService.listAllTheaterName();
         if(obj != null){
             return new ResponseEntity<>(obj,HttpStatus.OK);
         } else {
@@ -34,7 +38,7 @@ public class TheaterController {
 
     @GetMapping("/findTheaterByTheaterName/{theaterName}")
     public ResponseEntity findTheaterByTheaterName(@PathVariable String theaterName) {
-        Theater theater = theaterService.findTheaterByTheaterNames(theaterName);
+        TheaterRequest theater = theaterService.findTheaterByTheaterNames(theaterName);
         if(theater != null){
             return new ResponseEntity<>(theater,HttpStatus.OK);
         } else {
@@ -50,5 +54,4 @@ public class TheaterController {
             return new ResponseEntity<>("No theater has been found for the movie name" + movieName,HttpStatus.NOT_FOUND);
         }
     }
-
 }

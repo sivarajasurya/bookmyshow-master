@@ -1,13 +1,18 @@
 package com.gcit.siva.bookmyshow.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.gcit.siva.bookmyshow.dto.request.ShowRequest;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "show_screen" ,schema = "entertainment")
 public class ShowScreen {
@@ -36,4 +41,15 @@ public class ShowScreen {
     @JsonManagedReference
     private Theater theater;
 
+    @Override
+    public String toString() {
+        return "ShowScreen{" +
+                "showId=" + showId +
+                ", date=" + date +
+                ", totalSeat=" + totalSeat +
+                ", bookedSeat=" + bookedSeat +
+                ", movie=" + movie.getMovieId() + movie.getMovieName()+
+                ", theater=" + theater.getTheaterId() + theater.getTheaterName()+
+                '}';
+    }
 }

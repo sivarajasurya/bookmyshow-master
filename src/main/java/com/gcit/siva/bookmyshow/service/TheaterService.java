@@ -8,8 +8,9 @@ import java.util.List;
 public interface TheaterService {
 
     Theater saveTheaterName (TheaterRequest theater);
-    List<Theater> listAllTheaterName ();
+    List<TheaterRequest> listAllTheaterName ();
     Theater findByID(long id);
-    Theater findTheaterByTheaterNames(String theaterName);
+    TheaterRequest findTheaterByTheaterNames(String theaterName);
     List<Theater> findTheaterNameForMovieName(String movieName);
+    Theater saveTheaterName(Theater theater);
 }
