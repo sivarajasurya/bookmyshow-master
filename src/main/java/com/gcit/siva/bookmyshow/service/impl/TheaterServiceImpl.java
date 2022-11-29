@@ -63,8 +63,11 @@ public class TheaterServiceImpl implements TheaterService {
     @Override
     public  TheaterRequest findTheaterByTheaterNames(String theaterName){
         Theater theater = theaterRepo.findTheaterByTheaterName(theaterName);
-        TheaterRequest theaterRequest = new TheaterRequest(theater.getTheaterId(),theater.getTheaterName());
+        if (theater!=null) {
+            TheaterRequest theaterRequest = new TheaterRequest(theater.getTheaterId(), theater.getTheaterName());
         return theaterRequest;
+        }
+        else return null;
     }
 
     @Override

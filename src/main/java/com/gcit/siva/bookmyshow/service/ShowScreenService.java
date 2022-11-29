@@ -7,13 +7,12 @@ import com.gcit.siva.bookmyshow.dto.AllTheaterByMovieNameDto;
 import com.gcit.siva.bookmyshow.dto.SeatAvailableDto;
 import com.gcit.siva.bookmyshow.entity.ShowScreen;
 import com.gcit.siva.bookmyshow.dto.request.ShowRequest;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface ShowScreenService {
 
-    ResponseEntity saveShow (long theaterID, long movieId, ShowRequest showRequest);
+    ShowScreen saveShow (long theaterID, long movieId, ShowRequest showRequest);
     List<ShowScreen> findAllShowScreen();
     SeatAvailableDto getTicketAvailabilityByScreenId(long id);
     BookSeatForShowResponse bookSeatAvailableForShowScreen(BookSeatForShowRequest showRequest);
