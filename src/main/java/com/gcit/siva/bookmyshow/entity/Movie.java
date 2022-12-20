@@ -23,9 +23,8 @@ public class Movie {
     @Column(name = "movie_name")
     private String movieName;
 
-    @OneToMany(mappedBy = "movie")
     @JsonBackReference
-    @JsonIgnore
+    @OneToMany(mappedBy = "movie")
     private List<ShowScreen> showScreens;
 
 }

@@ -38,7 +38,7 @@ public class ShowScreenController {
     @GetMapping("/findAllShowScreen")
     public ResponseEntity showScreenList (){
         List<ShowScreen> allShowScreen = service.findAllShowScreen();
-        return (allShowScreen!=null) ? new ResponseEntity<>(allShowScreen, HttpStatus.OK) :new ResponseEntity<>("No Show was found  ",HttpStatus.BAD_REQUEST);
+        return (allShowScreen!=null) ? new ResponseEntity<>(allShowScreen, HttpStatus.OK) : new ResponseEntity<>("No Show was found  ",HttpStatus.BAD_REQUEST);
 
     }
 

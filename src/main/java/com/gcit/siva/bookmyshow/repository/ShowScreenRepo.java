@@ -19,20 +19,11 @@ public interface ShowScreenRepo extends JpaRepository<ShowScreen,Long> {
     @Query(value = "select * from show_screen where theater_id= :theaterID and movie_id = :movieID",nativeQuery = true)
     ShowScreen findShowScreenByTheaterIDAndMovieID (@Param("theaterID") long theaterID, @Param("movieID") long movieId);
 
-   // @Query(value = "update Show_Screen SET booked_seat = booked_seat - :numOfTickets WHERE show_id= :show_id",nativeQuery = true)
-    //ShowScreen updateBookedSeatInScreenShow (@Param("numOfTickets") int numOfTickets,@Param("show_id") long show_id );
-
     @Query(value = "select  distinct(theater_id) from show_screen where movie_id = :id",nativeQuery = true)
     List<Long> findTheaterIdByMovieId(@Param("id") long id);
 
     @Query(value = "select  distinct(movie_id) from show_screen where theater_id = :id",nativeQuery = true)
     List<Long> findMovieIdByTheaterId(@Param("id") long id);
-
-//    @Query(value = "select distinct(:disId) from show_screen where :whereId = :Id ",nativeQuery = true)
-//    List<Long> findIdForDistinctColumn(@Param("disId") String disId,@Param("whereId") String whereId,@Param("Id") long Id);
-
-//    @Query("distinct(theaterId),date from ShowScreen where movieId = :movieId ")
-//    List<TheaterIdDto> findTheaterIdByMovieId2(@Param("movieId") long movieId);
 
     @Query(value = "select * from show_screen where theater_id = :theaterId",nativeQuery = true)
     List<ShowScreen> getAllShowsByTheaterID(@Param("theaterId") long theaterId);
