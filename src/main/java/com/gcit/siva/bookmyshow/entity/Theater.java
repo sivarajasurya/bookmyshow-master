@@ -25,9 +25,8 @@ public class Theater{
     @NotBlank(message = "Enter a valid input")
     private String theaterName;
 
-    @OneToMany(mappedBy = "theater")
     @JsonBackReference
-    @JsonIgnore
+    @OneToMany(mappedBy = "theater")
     private List<ShowScreen> showScreens;
 
 }

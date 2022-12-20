@@ -1,5 +1,6 @@
 package com.gcit.siva.bookmyshow.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.gcit.siva.bookmyshow.dto.request.ShowRequest;
 import lombok.AllArgsConstructor;
@@ -31,14 +32,16 @@ public class ShowScreen {
     @Column(name = "booked_seat")
     private Integer bookedSeat;
 
+    @JsonIgnore
+    @JsonManagedReference
     @ManyToOne()
     @JoinColumn(name = "movie_id")
-    @JsonManagedReference
     private Movie movie;
 
+    @JsonIgnore
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "theater_id")
-    @JsonManagedReference
     private Theater theater;
 
     @Override
