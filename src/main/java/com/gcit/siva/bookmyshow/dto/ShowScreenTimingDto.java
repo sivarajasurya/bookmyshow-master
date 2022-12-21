@@ -12,10 +12,7 @@ import java.time.LocalDateTime;
 public class ShowScreenTimingDto {
 
     private long showId;
-
     private LocalDateTime date;
-
     private int totalSeat;
-
     private int bookedSeat;
 }

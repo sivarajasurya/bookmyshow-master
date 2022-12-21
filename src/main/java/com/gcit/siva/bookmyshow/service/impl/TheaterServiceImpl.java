@@ -43,7 +43,7 @@ public class TheaterServiceImpl implements TheaterService {
         List<Theater> theater = theaterRepo.findAll();
         List<TheaterRequest> theaterRequests = new ArrayList<>();
 
-        for(Theater t:theater){
+        for (Theater t : theater) {
             TheaterRequest theaterRequest = new TheaterRequest();
             theaterRequest.setTheaterId(t.getTheaterId());
             theaterRequest.setTheaterName(t.getTheaterName());
@@ -55,33 +55,34 @@ public class TheaterServiceImpl implements TheaterService {
     @Override
     public Theater findByID(long id) {
         Optional<Theater> optionalTheater = theaterRepo.findById(id);
-        if (optionalTheater.isPresent()){
+        if (optionalTheater.isPresent()) {
             return optionalTheater.get();
-        }throw new RuntimeException("Theater not found " + id);
-    }
-
-    @Override
-    public  TheaterRequest findTheaterByTheaterNames(String theaterName){
-        Theater theater = theaterRepo.findTheaterByTheaterName(theaterName);
-        if (theater!=null) {
-            TheaterRequest theaterRequest = new TheaterRequest(theater.getTheaterId(), theater.getTheaterName());
-        return theaterRequest;
         }
-        else return null;
+        throw new RuntimeException("Theater not found " + id);
     }
 
     @Override
-    public List<Theater> findTheaterNameForMovieName(String movieName){
+    public TheaterRequest findTheaterByTheaterNames(String theaterName) {
+        Theater theater = theaterRepo.findTheaterByTheaterName(theaterName);
+        if (theater != null) {
+            TheaterRequest theaterRequest = new TheaterRequest(theater.getTheaterId(), theater.getTheaterName());
+            return theaterRequest;
+        } else return null;
+    }
+
+    @Override
+    public List<Theater> findTheaterNameForMovieName(String movieName) {
 
         Movie movie = movieService.findMovieByMovieName(movieName);
         List<Theater> list = new ArrayList<>();
 
-        if (movie != null){
+        if (movie != null) {
             long movieID = movie.getMovieId();
-        List<Long> theaterIdByMovieId = showScreenRepo.findTheaterIdByMovieId(movieID);
-        for(Long l : theaterIdByMovieId){
-            list.add(this.findByID(l));
-        }}
+            List<Long> theaterIdByMovieId = showScreenRepo.findTheaterIdByMovieId(movieID);
+            for (Long l : theaterIdByMovieId) {
+                list.add(this.findByID(l));
+            }
+        }
         return list;
     }
 }

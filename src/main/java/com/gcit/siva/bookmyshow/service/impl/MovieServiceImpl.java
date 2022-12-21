@@ -28,13 +28,14 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie findMovieById(long id) {
         Optional<Movie> movie = movieRepo.findById(id);
-        if (movie.isPresent()){
+        if (movie.isPresent()) {
             return movie.get();
-        }throw new RuntimeException("Movie not found " + id);
+        }
+        throw new RuntimeException("Movie not found " + id);
     }
 
     @Override
-    public Movie findMovieByMovieName(String movieName){
+    public Movie findMovieByMovieName(String movieName) {
         return movieRepo.findMovieByMovieName(movieName);
     }
 }

@@ -10,11 +10,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TheaterRepo extends JpaRepository<Theater,Long> {
+public interface TheaterRepo extends JpaRepository<Theater, Long> {
 
-    @Query(value = "SELECT * FROM Theater",nativeQuery = true)
+    @Query(value = "SELECT * FROM Theater", nativeQuery = true)
     List<Theater> findAllTheater();
 
-    @Query(value = "select * from Theater where theater_name = :theaterName",nativeQuery = true)
-    Theater findTheaterByTheaterName (@Param("theaterName") String theaterName);
+    @Query(value = "select * from Theater where theater_name = :theaterName", nativeQuery = true)
+    Theater findTheaterByTheaterName(@Param("theaterName") String theaterName);
 }

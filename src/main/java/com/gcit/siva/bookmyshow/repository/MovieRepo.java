@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MovieRepo extends JpaRepository<Movie,Long> {
+public interface MovieRepo extends JpaRepository<Movie, Long> {
 
     @Query(value = "select * from Movie where movie_name = :movieName", nativeQuery = true)
     Movie findMovieByMovieName(@Param("movieName") String movieName);

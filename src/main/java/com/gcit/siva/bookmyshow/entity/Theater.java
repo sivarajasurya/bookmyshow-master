@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Theater{
+public class Theater {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

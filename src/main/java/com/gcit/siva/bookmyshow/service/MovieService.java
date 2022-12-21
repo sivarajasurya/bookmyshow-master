@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface MovieService {
 
-    Movie saveMovieName (Movie movie);
+    Movie saveMovieName(Movie movie);
 
-    List<Movie> listMovieNames ();
+    List<Movie> listMovieNames();
 
     Movie findMovieById(long id);
 

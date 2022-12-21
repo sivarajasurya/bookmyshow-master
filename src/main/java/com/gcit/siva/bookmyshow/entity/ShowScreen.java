@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "show_screen" ,schema = "entertainment")
+@Table(name = "show_screen", schema = "entertainment")
 public class ShowScreen {
 
     @Id
@@ -46,13 +46,6 @@ public class ShowScreen {
 
     @Override
     public String toString() {
-        return "ShowScreen{" +
-                "showId=" + showId +
-                ", date=" + date +
-                ", totalSeat=" + totalSeat +
-                ", bookedSeat=" + bookedSeat +
-                ", movie=" + movie.getMovieId() + movie.getMovieName()+
-                ", theater=" + theater.getTheaterId() + theater.getTheaterName()+
-                '}';
+        return "ShowScreen{" + "showId=" + showId + ", date=" + date + ", totalSeat=" + totalSeat + ", bookedSeat=" + bookedSeat + ", movie=" + movie.getMovieId() + movie.getMovieName() + ", theater=" + theater.getTheaterId() + theater.getTheaterName() + '}';
     }
 }

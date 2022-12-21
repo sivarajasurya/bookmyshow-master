@@ -19,39 +19,41 @@ public class TheaterController {
     @PostMapping("/addTheaterName")
     public ResponseEntity theater (@RequestBody TheaterRequest theater){
         Theater obj = theaterService.saveTheaterName(theater);
-        return (obj!=null)?new ResponseEntity<>(obj,HttpStatus.OK) : new ResponseEntity<>("Theater is not added ",HttpStatus.BAD_REQUEST) ;
+        return (obj != null) ? new ResponseEntity<>(obj, HttpStatus.OK) : new ResponseEntity<>("Theater is not added ", HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/addTheaterNamesss")
-    public Theater theater (@RequestBody Theater theater){
+    public Theater theater(@RequestBody Theater theater) {
         return theaterService.saveTheaterName(theater);
     }
+
     @GetMapping("/showAllTheaterName")
-    public ResponseEntity theaters (){
+    public ResponseEntity theaters() {
         List<TheaterRequest> obj = theaterService.listAllTheaterName();
-        if(obj != null){
-            return new ResponseEntity<>(obj,HttpStatus.OK);
+        if (obj != null) {
+            return new ResponseEntity<>(obj, HttpStatus.OK);
         } else {
-            return  new ResponseEntity<>("Theater not found",HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Theater not found", HttpStatus.NOT_FOUND);
         }
     }
 
     @GetMapping("/findTheaterByTheaterName/{theaterName}")
     public ResponseEntity findTheaterByTheaterName(@PathVariable String theaterName) {
         TheaterRequest theater = theaterService.findTheaterByTheaterNames(theaterName);
-        if(theater != null){
-            return new ResponseEntity<>(theater,HttpStatus.OK);
+        if (theater != null) {
+            return new ResponseEntity<>(theater, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Theater not found",HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Theater not found", HttpStatus.NOT_FOUND);
         }
     }
+
     @GetMapping("/findAllTheaterByMovieName/{movieName}")
-    public ResponseEntity findAllTheaterByMovieName(@PathVariable String movieName){
+    public ResponseEntity findAllTheaterByMovieName(@PathVariable String movieName) {
         List<Theater> obj = theaterService.findTheaterNameForMovieName(movieName);
-        if (!obj.isEmpty()){
-            return new ResponseEntity<>(obj,HttpStatus.OK);
-        }else {
-            return new ResponseEntity<>("No theater has been found for the movie name" + movieName,HttpStatus.NOT_FOUND);
+        if (!obj.isEmpty()) {
+            return new ResponseEntity<>(obj, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("No theater has been found for the movie name" + movieName, HttpStatus.NOT_FOUND);
         }
     }
 }

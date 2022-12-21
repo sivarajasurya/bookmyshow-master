@@ -83,8 +83,7 @@ public class ShowScreenServiceImpl implements ShowScreenService {
                 seatAvailableDto.setAvailableSeats(0);
             }
             return seatAvailableDto;
-        } else
-            return null;
+        } else return null;
     }
 
     @Override
@@ -145,34 +144,33 @@ public class ShowScreenServiceImpl implements ShowScreenService {
     public List<AllTheaterByMovieNameDto> findAllShowScreenByMovieName(String movieName) {
         Movie movie = movieService.findMovieByMovieName(movieName);
 
-        if (movie!=null){
-        long id = movie.getMovieId();
+        if (movie != null) {
+            long movieId = movie.getMovieId();
 
-        List<Long> theaterId = showScreenRepo.findTheaterIdByMovieId(id);
-        List<AllTheaterByMovieNameDto> list = new ArrayList<>();
+            List<Long> theaterId = showScreenRepo.findTheaterIdByMovieId(movieId);
+            List<AllTheaterByMovieNameDto> list = new ArrayList<>();
 
-        for (Long k : theaterId) {
-            AllTheaterByMovieNameDto dto = new AllTheaterByMovieNameDto();
-            dto.setMovieName(movie.getMovieName());
-            Theater byID = theaterService.findByID(k);
-            dto.setTheaterName(byID.getTheaterName());
+            for (Long k : theaterId) {
+                AllTheaterByMovieNameDto dto = new AllTheaterByMovieNameDto();
+                dto.setMovieName(movie.getMovieName());
+                Theater byID = theaterService.findByID(k);
+                dto.setTheaterName(byID.getTheaterName());
 
-            List<ShowScreen> allShowsByTheaterID = showScreenRepo.getAllShowsByTheaterID(k);
-            List<ShowScreenTimingDto> showDto = new ArrayList<>();
+                List<ShowScreen> getAllShowsByTheaterIdAndMovieId = showScreenRepo.getAllShowsByTheaterIdAndMovieId(k, movieId);
+                List<ShowScreenTimingDto> showDto = new ArrayList<>();
 
-            for (ShowScreen j : allShowsByTheaterID) {
-                if (j.getMovie().getMovieId()==id && j.getTheater().getTheaterId()==k){
-                ShowScreenTimingDto dto1 = new ShowScreenTimingDto();
-                dto1.setShowId(j.getShowId());
-                dto1.setDate(j.getDate());
-                dto1.setTotalSeat(j.getTotalSeat());
-                dto1.setBookedSeat(j.getBookedSeat());
-                showDto.add(dto1);}
+                for (ShowScreen j : getAllShowsByTheaterIdAndMovieId) {
+                    ShowScreenTimingDto dto1 = new ShowScreenTimingDto();
+                    dto1.setShowId(j.getShowId());
+                    dto1.setDate(j.getDate());
+                    dto1.setTotalSeat(j.getTotalSeat());
+                    dto1.setBookedSeat(j.getBookedSeat());
+                    showDto.add(dto1);
+                }
+                dto.setShowScreens(showDto);
+                list.add(dto);
             }
-            dto.setShowScreens(showDto);
-            list.add(dto);
-        }
-        return list;
+            return list;
         }
         return null;
     }
@@ -191,35 +189,35 @@ public class ShowScreenServiceImpl implements ShowScreenService {
     public AllMoviesByTheaterNameDto findAllShowScreenByTheaterName(String theaterName) {
 
         TheaterRequest theater = theaterService.findTheaterByTheaterNames(theaterName);
-        if (theater!=null){
-        long id = theater.getTheaterId();
+        if (theater != null) {
+            long id = theater.getTheaterId();
 
-        List<Long> movieId = showScreenRepo.findMovieIdByTheaterId(id);
+            List<Long> movieId = showScreenRepo.findMovieIdByTheaterId(id);
 
-        AllMoviesByTheaterNameDto dto = new AllMoviesByTheaterNameDto();
-        dto.setTheaterName(theater.getTheaterName());
+            AllMoviesByTheaterNameDto dto = new AllMoviesByTheaterNameDto();
+            dto.setTheaterName(theater.getTheaterName());
 
-        List<MovieNameDto> list1 = new ArrayList<>();
-        for (Long k : movieId) {
-            MovieNameDto dto1 = new MovieNameDto();
-            dto1.setMovieName(movieService.findMovieById(k).getMovieName());
-            List<ShowScreen> allShowsByMovieId = showScreenRepo.getAllShowsByTheaterID(id);
-            List<ShowScreenTimingDto> list2 = new ArrayList<>();
-            for (ShowScreen t : allShowsByMovieId) {
-                ShowScreenTimingDto dto2 = new ShowScreenTimingDto();
-                if (t.getMovie().getMovieId() == k) {
-                    dto2.setShowId(t.getShowId());
-                    dto2.setDate(t.getDate());
-                    dto2.setTotalSeat(t.getTotalSeat());
-                    dto2.setBookedSeat(t.getBookedSeat());
-                    list2.add(dto2);
+            List<MovieNameDto> list1 = new ArrayList<>();
+            for (Long k : movieId) {
+                MovieNameDto dto1 = new MovieNameDto();
+                dto1.setMovieName(movieService.findMovieById(k).getMovieName());
+                List<ShowScreen> allShowsByMovieId = showScreenRepo.getAllShowsByTheaterID(id);
+                List<ShowScreenTimingDto> list2 = new ArrayList<>();
+                for (ShowScreen t : allShowsByMovieId) {
+                    ShowScreenTimingDto dto2 = new ShowScreenTimingDto();
+                    if (t.getMovie().getMovieId() == k) {
+                        dto2.setShowId(t.getShowId());
+                        dto2.setDate(t.getDate());
+                        dto2.setTotalSeat(t.getTotalSeat());
+                        dto2.setBookedSeat(t.getBookedSeat());
+                        list2.add(dto2);
+                    }
                 }
+                dto1.setScreenTiming(list2);
+                list1.add(dto1);
             }
-            dto1.setScreenTiming(list2);
-            list1.add(dto1);
-        }
-        dto.setMovieName(list1);
-        return dto;
+            dto.setMovieName(list1);
+            return dto;
         }
         return null;
     }

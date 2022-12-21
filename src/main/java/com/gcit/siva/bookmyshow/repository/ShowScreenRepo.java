@@ -11,31 +11,34 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public interface ShowScreenRepo extends JpaRepository<ShowScreen,Long> {
+public interface ShowScreenRepo extends JpaRepository<ShowScreen, Long> {
 
-    @Query(value = "select * from show_screen where movie_id= :movieId",nativeQuery = true)
-    List<ShowScreen> findAllShowScreeByMovieID (@Param("movieId") long movieId);
+    @Query(value = "select * from show_screen where movie_id= :movieId", nativeQuery = true)
+    List<ShowScreen> findAllShowScreeByMovieID(@Param("movieId") long movieId);
 
-    @Query(value = "select * from show_screen where theater_id= :theaterID and movie_id = :movieID",nativeQuery = true)
-    ShowScreen findShowScreenByTheaterIDAndMovieID (@Param("theaterID") long theaterID, @Param("movieID") long movieId);
+    @Query(value = "select * from show_screen where theater_id= :theaterID and movie_id = :movieID", nativeQuery = true)
+    ShowScreen findShowScreenByTheaterIDAndMovieID(@Param("theaterID") long theaterID, @Param("movieID") long movieId);
 
-    @Query(value = "select  distinct(theater_id) from show_screen where movie_id = :id",nativeQuery = true)
+    @Query(value = "select  distinct(theater_id) from show_screen where movie_id = :id", nativeQuery = true)
     List<Long> findTheaterIdByMovieId(@Param("id") long id);
 
-    @Query(value = "select  distinct(movie_id) from show_screen where theater_id = :id",nativeQuery = true)
+    @Query(value = "select  distinct(movie_id) from show_screen where theater_id = :id", nativeQuery = true)
     List<Long> findMovieIdByTheaterId(@Param("id") long id);
 
-    @Query(value = "select * from show_screen where theater_id = :theaterId",nativeQuery = true)
+    @Query(value = "select * from show_screen where theater_id = :theaterId", nativeQuery = true)
     List<ShowScreen> getAllShowsByTheaterID(@Param("theaterId") long theaterId);
 
-    @Query(value = "select * from show_screen where movie_id = :movie_id",nativeQuery = true)
+    @Query(value = "select * from show_screen where (theater_id = :theaterId and movie_id= :movieId)", nativeQuery = true)
+    List<ShowScreen> getAllShowsByTheaterIdAndMovieId(@Param("theaterId") long theaterId, @Param("movieId") long movieId);
+
+
+    @Query(value = "select * from show_screen where movie_id = :movie_id", nativeQuery = true)
     List<ShowScreen> getAllShowsByMovieId(@Param("movie_id") long movie_id);
 
     @Modifying
     @Transactional
-    @Query(value = "update show_screen set booked_seat =  :numOfSeat  where show_id= :showId",nativeQuery = true)
-    void decreaseCountOfBookedSeat (@Param("numOfSeat") int numOfSeat , @Param("showId") long showId);
-
+    @Query(value = "update show_screen set booked_seat =  :numOfSeat  where show_id= :showId", nativeQuery = true)
+    void decreaseCountOfBookedSeat(@Param("numOfSeat") int numOfSeat, @Param("showId") long showId);
 
 
 }
