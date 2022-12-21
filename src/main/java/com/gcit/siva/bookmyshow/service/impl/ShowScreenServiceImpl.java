@@ -161,12 +161,13 @@ public class ShowScreenServiceImpl implements ShowScreenService {
             List<ShowScreenTimingDto> showDto = new ArrayList<>();
 
             for (ShowScreen j : allShowsByTheaterID) {
+                if (j.getMovie().getMovieId()==id && j.getTheater().getTheaterId()==k){
                 ShowScreenTimingDto dto1 = new ShowScreenTimingDto();
                 dto1.setShowId(j.getShowId());
                 dto1.setDate(j.getDate());
                 dto1.setTotalSeat(j.getTotalSeat());
                 dto1.setBookedSeat(j.getBookedSeat());
-                showDto.add(dto1);
+                showDto.add(dto1);}
             }
             dto.setShowScreens(showDto);
             list.add(dto);
